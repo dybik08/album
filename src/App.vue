@@ -2,7 +2,7 @@
   <div class="wrapper">
     <BackgroundImage />
     <Claim />
-    <SearchInput />
+    <SearchInput :value="searchValue" v-model="searchValue" @input="handleInput" />
   </div>
 </template>
 <script>
@@ -28,6 +28,7 @@
         methods: {
             // eslint-disable-next-line
             handleInput: debounce(function() {
+
                 axios.get(`${API}?q=${this.searchValue}&media_type=image`)
                     .then((response) => {
                         this.results = response.data.collection.items;
