@@ -18,7 +18,8 @@
         },
         computed: {
             style() {
-                return `background-image: url("${this.photo}")`;
+                return `background-image: url("${this.photo}")` ;
+                //
             },
         },
     };

@@ -8,9 +8,8 @@
     </transition>
     <Claim v-if="step === 0" />
     <SearchInput :value="searchValue" v-model="searchValue" @input="handleInput" :dark="step === 1" />
-    <Modal v-if="modalOpen" :item="modalItem" @closeModal="modalOpen = false" />
     <div class="results" v-if="results && !loading && step === 1">
-      <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id" @click.native="handleModalOpen(item)" />
+      <a v-for="item in results"  data-fancybox="gallery" v-bind:href="item.links[0].href" ><img v-bind:src="item.links[0].href"></a>
     </div>
     <div class="loader" v-if="step === 1 && loading" />
 
@@ -23,7 +22,6 @@
     import SearchInput from '@/components/SearchInput.vue';
     import BackgroundImage from "./components/BackgroundImage";
     import Item from "./components/Item";
-    import Modal from "@/components/Modal.vue";
 
     const API = 'https://images-api.nasa.gov/search';
     export default {
@@ -33,7 +31,6 @@
             Claim,
             SearchInput,
             Item,
-            Modal,
         },
         data() {
             return {
@@ -149,5 +146,9 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+  a img {
+    width: 100%;
+    height: 250px;
   }
 </style>
