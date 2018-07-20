@@ -94,11 +94,13 @@
     }
     .innerWrapper {
         display: flex;
-        /*height: 100%;*/
+        height: 100%;
         padding: 30px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        overflow: hidden;
+        box-sizing: border-box;
         @media (min-width: 1024px) {
             flex-direction: row;
             .photo {
@@ -107,13 +109,11 @@
             }
         }
         .photo {
-            width: 100%;
-            height: auto;
             background: black;
-
+            position: relative;
             img {
-                width: 100%;
-                max-height: 400px;
+                max-width: 100%;
+
             }
         }
         .description {
