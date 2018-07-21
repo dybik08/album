@@ -1,7 +1,7 @@
 <template>
   <div :class="[{ flexStart: step === 1 } ,'wrapper']">
     <transition name="slide">
-      <img id="img" src="./assets/logo.svg" class="logo" v-if="step === 1" v-on:click="handleClick" >
+      <img id="img" src="./assets/odyssey.svg" class="logo" v-if="step === 1" v-on:click="handleClick" >
     </transition>
     <transition name="fade">
       <BackgroundImage v-if="step === 0"/>
@@ -74,17 +74,30 @@
     padding: 0;
   }
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .3s ease;
+    transition: opacity 1.9s ease;
+    transition-delay: 0.5s;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
-  .slide-enter-active, .slide-leave-active {
-    transition: margin-top .3s ease;
+  .slide-enter-active {
+      transition: margin-top .7s ease;
+      transition-delay: 0.1s;
+
   }
-  .slide-enter, .slide-leave-to {
-    margin-top: -50px;
+  .slide-enter {
+      margin-top: -250px;
   }
+  .slide-leave-active {
+      transition: margin-top .7s ease;
+
+  }
+  .slide-leave-to {
+      margin-top: -450px;
+  }
+
+
+
   .wrapper {
     margin: 0;
     width: 100%;
@@ -97,13 +110,12 @@
     justify-content: center;
     &.flexStart {
       justify-content: flex-start;
-      background-color: slategrey;
+      background-color: black;
     }
   }
   .logo {
     position: absolute;
-    top: 30px;
-    height: 40px;
+    height: 160px;
   }
   .results {
     margin-top: 50px;

@@ -31,7 +31,7 @@
 </script>
 <style lang="scss" scoped>
     .searchWrapper {
-        margin-top: 50px;
+        margin-top: 30px;
         display: flex;
         flex-direction: column;
         width: 250px;
@@ -54,8 +54,11 @@
             box-shadow: 0 10px 20px -8px rgba(255,255,255, .5);
         }
         .dark {
-            color: #1e3d4a;
-            border-bottom-color: #1e3d4a;
+            color: #959595;
+            border-bottom-color: #959595;
+            position: relative;
+            top: 20px;
+            margin-top: 100px;
         }
         .dark:focus {
             box-shadow: 0 10px 20px -8px rgba(#1e3d4a, .2);
