@@ -1,7 +1,7 @@
 <template>
   <div :class="[{ flexStart: step === 1 } ,'wrapper']">
     <transition name="slide">
-      <img src="./assets/logo.svg" class="logo" v-if="step === 1">
+      <img id="img" src="./assets/logo.svg" class="logo" v-if="step === 1" v-on:click="handleClick" >
     </transition>
     <transition name="fade">
       <BackgroundImage v-if="step === 0"/>
@@ -9,10 +9,9 @@
     <Claim v-if="step === 0" />
     <SearchInput :value="searchValue" v-model="searchValue" @input="handleInput" :dark="step === 1" />
     <div class="results" v-if="results && !loading && step === 1">
-      <a v-for="item in results"  data-fancybox="gallery" v-bind:href="item.links[0].href" ><img v-bind:src="item.links[0].href"></a>
+      <a v-for="item in results"  data-fancybox="gallery" v-bind:data-caption="item.data[0].title" v-bind:href="item.links[0].href" ><img id="img-list" v-bind:src="item.links[0].href"></a>
     </div>
     <div class="loader" v-if="step === 1 && loading" />
-
   </div>
 </template>
 <script>
@@ -34,8 +33,6 @@
         },
         data() {
             return {
-                modalOpen: false,
-                modalItem: null,
                 loading: false,
                 step: 0,
                 searchValue: '',
@@ -43,9 +40,11 @@
             };
         },
         methods: {
-            handleModalOpen(item) {
-                this.modalOpen = true;
-                this.modalItem = item;
+            handleClick() {
+                this.searchValue = '';
+                this.step = 0;
+                this.loading = false;
+
             },
             handleInput: debounce(function() {
                 this.loading = true;
@@ -58,7 +57,7 @@
                     .catch((error) => {
                         console.log(error);
                     });
-            }, 500),
+            }, 1000),
         },
     };
 </script>
@@ -98,11 +97,13 @@
     justify-content: center;
     &.flexStart {
       justify-content: flex-start;
+      background-color: slategrey;
     }
   }
   .logo {
     position: absolute;
     top: 30px;
+    height: 40px;
   }
   .results {
     margin-top: 50px;
@@ -149,6 +150,13 @@
   }
   a img {
     width: 100%;
-    height: 250px;
+    height: 350px;
+    transition: transform .2s;
+  }
+  #img-list:hover{
+      transform: scale(1.05);
+      border-style: solid ;
+      border-width: 1px;
+      border-color: white;
   }
 </style>
