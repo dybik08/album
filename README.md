@@ -1,4 +1,4 @@
-# album
+# Image gallery app
 
 ## Project setup
 ```
@@ -10,17 +10,8 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Nasa API
 
-### Lints and fixes files
-```
-npm run lint
-```
+* [NASA API instructions](https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf)
 
-### Run your unit tests
-```
-npm run test:unit
-```
+
