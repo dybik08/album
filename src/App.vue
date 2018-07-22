@@ -1,19 +1,17 @@
 <template>
   <div :class="[{ flexStart: step === 1 } ,'wrapper']">
     <transition name="slide">
-      <img src="./assets/logo.svg" class="logo" v-if="step === 1">
+      <img id="img" src="./assets/odyssey.svg" class="logo" v-if="step === 1" v-on:click="handleClick" >
     </transition>
     <transition name="fade">
       <BackgroundImage v-if="step === 0"/>
     </transition>
     <Claim v-if="step === 0" />
     <SearchInput :value="searchValue" v-model="searchValue" @input="handleInput" :dark="step === 1" />
-    <Modal v-if="modalOpen" :item="modalItem" @closeModal="modalOpen = false" />
     <div class="results" v-if="results && !loading && step === 1">
-      <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id" @click.native="handleModalOpen(item)" />
+      <a v-for="item in results"  data-fancybox="gallery" v-bind:data-caption="item.data[0].title" v-bind:href="item.links[0].href" ><img id="img-list" v-bind:src="item.links[0].href"></a>
     </div>
     <div class="loader" v-if="step === 1 && loading" />
-
   </div>
 </template>
 <script>
@@ -23,7 +21,6 @@
     import SearchInput from '@/components/SearchInput.vue';
     import BackgroundImage from "./components/BackgroundImage";
     import Item from "./components/Item";
-    import Modal from "@/components/Modal.vue";
 
     const API = 'https://images-api.nasa.gov/search';
     export default {
@@ -33,12 +30,9 @@
             Claim,
             SearchInput,
             Item,
-            Modal,
         },
         data() {
             return {
-                modalOpen: false,
-                modalItem: null,
                 loading: false,
                 step: 0,
                 searchValue: '',
@@ -46,9 +40,11 @@
             };
         },
         methods: {
-            handleModalOpen(item) {
-                this.modalOpen = true;
-                this.modalItem = item;
+            handleClick() {
+                this.searchValue = '';
+                this.step = 0;
+                this.loading = false;
+
             },
             handleInput: debounce(function() {
                 this.loading = true;
@@ -61,7 +57,7 @@
                     .catch((error) => {
                         console.log(error);
                     });
-            }, 500),
+            }, 1000),
         },
     };
 </script>
@@ -78,17 +74,30 @@
     padding: 0;
   }
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .3s ease;
+    transition: opacity 1.9s ease;
+    transition-delay: 0.5s;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
-  .slide-enter-active, .slide-leave-active {
-    transition: margin-top .3s ease;
+  .slide-enter-active {
+      transition: margin-top .7s ease;
+      transition-delay: 0.1s;
+
   }
-  .slide-enter, .slide-leave-to {
-    margin-top: -50px;
+  .slide-enter {
+      margin-top: -250px;
   }
+  .slide-leave-active {
+      transition: margin-top .7s ease;
+
+  }
+  .slide-leave-to {
+      margin-top: -450px;
+  }
+
+
+
   .wrapper {
     margin: 0;
     width: 100%;
@@ -101,11 +110,12 @@
     justify-content: center;
     &.flexStart {
       justify-content: flex-start;
+      background-color: black;
     }
   }
   .logo {
     position: absolute;
-    top: 30px;
+    height: 160px;
   }
   .results {
     margin-top: 50px;
@@ -149,5 +159,16 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+  a img {
+    width: 100%;
+    height: 350px;
+    transition: transform .2s;
+  }
+  #img-list:hover{
+      transform: scale(1.05);
+      border-style: solid ;
+      border-width: 1px;
+      border-color: white;
   }
 </style>

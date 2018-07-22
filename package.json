@@ -11,9 +11,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "eslint": "^4.19.1",
+    "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "vue": "^2.5.16",
     "vue-dragscroll": "^1.5.0",
+    "vue-particles": "^1.0.9",
     "vue-read-more": "^1.1.1",
     "vue-router": "^3.0.1"
   },
