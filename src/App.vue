@@ -118,14 +118,18 @@
     height: 160px;
   }
   .results {
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    @media (min-width: 768px) {
-      width: 90%;
-      grid-template-columns: 1fr 1fr 1fr;
-    }
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: 1fr ;
+      grid-gap: 20px;
+      @media (min-width: 650px) {
+          width: 100%;
+          grid-template-columns: 1fr 1fr;
+      }
+      @media (min-width: 992px) {
+          width: 90%;
+          grid-template-columns: 1fr 1fr 1fr;
+      }
   }
   .loader {
     margin-top: 100px;
