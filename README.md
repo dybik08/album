@@ -14,4 +14,6 @@ npm run serve
 
 * [NASA API instructions](https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf)
 
+### Live site
 
+* [Nasa image gallery](https://infallible-engelbart-b41168.netlify.com/)
